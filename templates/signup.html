@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>User Sign-Up</h1>
+<form action="/" method="POST">
+    <label for="email">Email</label>
+    <!--TODO fix error message--> 
+        <input name="email" type="text" id="email"> 
+    <br>
+    <label for="password">Password</label>
+        <input name="password" type="password" id="password"> 
+    <br>    
+    <label for="verify">Verify Password</label>
+        <input name="verify" type="password" id="verify"> 
+    <br>
+    <input type="submit" value="Sign-Up">
+    {{error}}
+</form>
+{% endblock %}
