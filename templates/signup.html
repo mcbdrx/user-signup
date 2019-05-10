@@ -2,18 +2,98 @@
 
 {% block content %}
 <h1>User Sign-Up</h1>
+
+
 <form action="/" method="POST">
-    <label for="email">Email</label>
-    <!--TODO fix error message--> 
-        <input name="email" type="text" id="email"> 
-    <br>
-    <label for="password">Password</label>
-        <input name="password" type="password" id="password"> 
-    <br>    
-    <label for="verify">Verify Password</label>
-        <input name="verify" type="password" id="verify"> 
-    <br>
-    <input type="submit" value="Sign-Up">
-    {{error}}
+    <table>
+        <tr>
+            <td><label for="email">Email (optional)</label></td>
+            <td>
+                <input name="email" type="email" id="email" value="{{ request.form['email'] }}">
+            </td>
+            <td>
+                {% with messages = get_flashed_messages(category_filter=["email_error"]) %}
+                
+                    
+                        {% if messages %}
+                            <span class="{{category}}" style="color: red;">{{message}}</span>
+                        {% endif %}
+                    
+                    
+                {% endwith %}
+            </td>
+        </tr>
+        <tr>
+            <td><label for="username">Username</label></td>
+            <td>
+                <input name="username" required type="text" id="username" value="{{ request.form['username'] }}">
+            </td>
+            <td>
+                {% with messages = get_flashed_messages(category_filter=["username_error"]) %}
+                
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <span class="{{category}}" style="color: red;">{{message}}</span>
+                        {% endfor %}
+                    {% endif %}
+                
+                
+                {% endwith %}
+            </td>
+        </tr>
+        <tr>
+            <td><label for="password">Password</label></td>
+            <td>
+                <input name="password" required type="password" id="password">
+            </td>
+            <td>
+                {% with messages = get_flashed_messages(category_filter=["password_error"]) %}
+                
+                    
+                    {% if messages %}
+                        {% for message in messages %}   
+                            <span class="{{category}}" style="color: red;">{{message}}</span>
+                        {% endfor %}
+                    {% endif %}
+                
+                
+                {% endwith %}
+            </td>
+        </tr>
+        <tr>
+            <td><label for="verify">Verify password</label></td>
+            <td>
+                <input name="verify" required type="password" id="verify">
+            </td>
+            <td>
+                {% with messages = get_flashed_messages(category_filter=["verify_error"]) %}
+                
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <span class="{{category}}" style="color: red;">{{message}}</span>
+                        {% endfor %}
+                    {% endif %}
+                
+                
+                {% endwith %}
+            </td>
+            <td>
+                {% with messages = get_flashed_messages(category_filter=["error"]) %}
+            
+                
+                    {% if messages %}
+                        {% for message in messages %}
+                            <span class="{{category}}" style="color: red;">{{message}}</span>
+                        {% endfor %}
+                    {% endif %}
+                
+            
+                {% endwith %}
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Sign up" id="submit">
 </form>
 {% endblock %}
