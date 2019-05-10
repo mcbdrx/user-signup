@@ -5,18 +5,21 @@
 
 
 <form action="/" method="POST">
+
     <table>
         <tr>
             <td><label for="email">Email (optional)</label></td>
             <td>
-                <input name="email" type="email" id="email" value="{{ request.form['email'] }}">
+                <input name="email" type="text" id="email" value="{{ request.form['email'] }}">
             </td>
             <td>
                 {% with messages = get_flashed_messages(category_filter=["email_error"]) %}
                 
                     
                         {% if messages %}
-                            <span class="{{category}}" style="color: red;">{{message}}</span>
+                            {% for message in messages %}
+                                <span class="{{category}}" style="color: red;">{{message}}</span>
+                            {% endfor %}
                         {% endif %}
                     
                     
@@ -96,4 +99,5 @@
     </table>
     <input type="submit" value="Sign up" id="submit">
 </form>
+
 {% endblock %}
